@@ -38,7 +38,12 @@ public class BeerService {
 	}
 
 	private int getDifferenceBetweenTemperatureAndBeerAverageTemperature(int temperature, Beer mainBeer) {
-		return 0;
+		int difference = temperature - mainBeer.getTemperatureAverage();
+		
+		if(difference < 0)
+			return -difference;
+		
+		return difference;
 	}
 
 	private Beer chooseBeerByName(Beer... beer) {
@@ -49,7 +54,7 @@ public class BeerService {
 		beerList.add(beer[firstElement]);
 		beerList.add(beer[lastElement]);
 		
-		beerList.sort((firstBeer, secondBeer) -> firstBeer.getType().compareTo(secondBeer.getType()));
+		beerList.sort((firstBeer, secondBeer) -> firstBeer.getType().toLowerCase().compareTo(secondBeer.getType().toLowerCase()));
 		
 		return beerList.get(firstElement);
 	}

@@ -3,13 +3,13 @@ package br.com.ciclic.beer_webservice.model;
 public class PlaylistAndBeerStyle {
 
 	private String beerStyle;
-	private ListOfTracks playlist;
+	private Playlist playlist;
 
 	public PlaylistAndBeerStyle() {
 
 	}
 
-	public PlaylistAndBeerStyle(String beerStyle, ListOfTracks playlist) {
+	public PlaylistAndBeerStyle(String beerStyle, Playlist playlist) {
 		this.beerStyle = beerStyle;
 		this.playlist = playlist;
 	}
@@ -22,11 +22,11 @@ public class PlaylistAndBeerStyle {
 		this.beerStyle = beerStyle;
 	}
 
-	public ListOfTracks getPlaylist() {
+	public Playlist getPlaylist() {
 		return playlist;
 	}
 
-	public void setPlaylist(ListOfTracks playlist) {
+	public void setPlaylist(Playlist playlist) {
 		this.playlist = playlist;
 	}
 

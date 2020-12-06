@@ -1,18 +1,15 @@
 package br.com.ciclic.beer_webservice.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ExternalUrls {
 
-	@JsonProperty("spotify")
-	private String link;
+	private String spotify;
 
-	public String getLink() {
-		return link;
+	public String getSpotify() {
+		return spotify;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setSpotify(String spotify) {
+		this.spotify = spotify;
 	}
 
 }

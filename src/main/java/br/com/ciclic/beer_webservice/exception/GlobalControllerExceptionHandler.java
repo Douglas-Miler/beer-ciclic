@@ -14,8 +14,19 @@ public class GlobalControllerExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)  // 500
     @ExceptionHandler(InternalServerErrorException.class)
-    public void handleConflict(InternalServerErrorException exception) {
+    public void handleInternalServerError(InternalServerErrorException exception) {
 		LOGGER.error(exception.getMessage());
 	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(NoPlaylistsFoundException.class)
+	public void handleNoPlaylistsFound() {
+		LOGGER.error("There are no playlists for this user id");
+	}
 	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(BeerStyleNotMatchedAnyPlaylistException.class)
+	public void handleBeerStyleNotMatchedAnyPlaylist() {
+		LOGGER.error("The beer style didn't match any playlist name");
+	}
 }

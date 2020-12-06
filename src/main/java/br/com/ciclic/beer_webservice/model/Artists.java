@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Artists {
 
 	private String name;
-
-	@JsonProperty("external_urls")
+	
+	@JsonProperty(value = "external_urls")
 	private ExternalUrls externalUrls;
 
 	public String getName() {
