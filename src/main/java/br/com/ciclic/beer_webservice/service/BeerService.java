@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ciclic.beer_webservice.model.Beer;
+import br.com.ciclic.beer_webservice.model.BeerDto;
 import br.com.ciclic.beer_webservice.repository.BeerRepository;
 
 @Service
@@ -57,6 +58,10 @@ public class BeerService {
 		beerList.sort((firstBeer, secondBeer) -> firstBeer.getType().toLowerCase().compareTo(secondBeer.getType().toLowerCase()));
 		
 		return beerList.get(firstElement);
+	}
+
+	public int getTemperatureAverage(BeerDto beerDto) {
+		return (beerDto.getMaxTemperature() - beerDto.getMinTemperature()) / 2;
 	}
 	
 }

@@ -37,7 +37,7 @@ public class SpotifyService {
 
 	private SpotifyApi spotifyApi;
 
-	public Paging<PlaylistSimplified> getUserPlaylists() throws InternalServerErrorException, NoPlaylistsFoundException {
+	public Paging<PlaylistSimplified> getUserPlaylists() throws Exception {
 		this.createSpotifyApi();
 		
 		Paging<PlaylistSimplified> playlistSimplified = null;
