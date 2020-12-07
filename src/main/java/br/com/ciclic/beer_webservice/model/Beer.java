@@ -1,5 +1,6 @@
 package br.com.ciclic.beer_webservice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +12,17 @@ public class Beer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(nullable = false)
 	private String type;
+	
+	@Column(nullable = false)
 	private int minTemperature;
+	
+	@Column(nullable = false)
 	private int maxTemperature;
+	
+	@Column(nullable = false)
 	private int temperatureAverage;
 
 	public Beer() {

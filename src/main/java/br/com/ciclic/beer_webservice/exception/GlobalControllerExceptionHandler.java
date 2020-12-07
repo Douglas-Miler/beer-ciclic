@@ -2,9 +2,11 @@ package br.com.ciclic.beer_webservice.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -52,6 +54,22 @@ public class GlobalControllerExceptionHandler {
 	
 	@ExceptionHandler(EmptyResultDataAccessException.class)
 	public ResponseEntity<ResponseInformation> handleEmptyResultDataAccessException(EmptyResultDataAccessException exception) {
+		LOGGER.error(exception.getMessage());
+		return new ResponseEntity<ResponseInformation>(
+				new ResponseInformation(HttpStatus.BAD_REQUEST, exception.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<ResponseInformation> handleDataIntegrityViolationException(DataIntegrityViolationException exception){
+		LOGGER.error(exception.getMessage());
+		return new ResponseEntity<ResponseInformation>(
+				new ResponseInformation(HttpStatus.BAD_REQUEST, exception.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<ResponseInformation> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception){
 		LOGGER.error(exception.getMessage());
 		return new ResponseEntity<ResponseInformation>(
 				new ResponseInformation(HttpStatus.BAD_REQUEST, exception.getMessage()),

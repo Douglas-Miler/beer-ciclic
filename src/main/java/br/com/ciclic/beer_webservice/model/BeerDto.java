@@ -3,9 +3,7 @@ package br.com.ciclic.beer_webservice.model;
 public class BeerDto {
 
 	private String type;
-	
 	private int minTemperature;
-	
 	private int maxTemperature;
 
 	public BeerDto() {

@@ -3,8 +3,6 @@ package br.com.ciclic.beer_webservice.service;
 import java.io.IOException;
 
 import org.apache.hc.core5.http.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +24,6 @@ import br.com.ciclic.beer_webservice.model.ListOfTracks;
 public class SpotifyService {
 
 	private static final String REQUEST_PARAMETERS_FOR_GET_TRACKS = "?fields=items(track(name%2Cartists(external_urls%2Cname)))";
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(SpotifyService.class);
 
 	@Autowired
 	private RestTemplateService restTemplateService;

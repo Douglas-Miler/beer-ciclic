@@ -8,4 +8,4 @@ INSERT INTO BEER (id, type, min_temperature, max_temperature, temperature_averag
   	(7, 'Dunkel',          -8, 2,   -3),
   	(8, 'Imperial Stouts', -10, 13, 1),
   	(9, 'Brown ale',        0, 14,  7),
-  	(10, 'primeira',        0, 14,  5);
+  	(10, 'primeira',        0, 13,  6);

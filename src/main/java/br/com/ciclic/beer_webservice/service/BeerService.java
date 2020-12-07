@@ -2,8 +2,10 @@ package br.com.ciclic.beer_webservice.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.ciclic.beer_webservice.model.Beer;
@@ -61,7 +63,23 @@ public class BeerService {
 	}
 
 	public int getTemperatureAverage(BeerDto beerDto) {
-		return (beerDto.getMaxTemperature() - beerDto.getMinTemperature()) / 2;
+		return (beerDto.getMaxTemperature() + beerDto.getMinTemperature()) / 2;
+	}
+
+	public Beer update(long id, BeerDto beerDto) {
+		Optional<Beer> optionalBeer = this.beerRepository.findById(id);
+		
+		if(optionalBeer.isPresent()){
+			Beer beer = optionalBeer.get();
+			beer.setMaxTemperature(beerDto.getMaxTemperature());
+			beer.setMinTemperature(beerDto.getMinTemperature());
+			beer.setType(beerDto.getType());
+			beer.setTemperatureAverage(this.getTemperatureAverage(beerDto));
+			return this.beerRepository.save(beer);
+		}
+		
+		throw new EmptyResultDataAccessException(1);
+		
 	}
 	
 }

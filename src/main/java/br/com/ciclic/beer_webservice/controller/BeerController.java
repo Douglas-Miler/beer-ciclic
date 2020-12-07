@@ -1,13 +1,16 @@
 package br.com.ciclic.beer_webservice.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,14 +41,24 @@ public class BeerController {
 		return beerRepository.findAll();
 	}
 
-	@GetMapping("/spotify/{temperature}")
+	@GetMapping("/spotify/temperature/{temperature}")
 	public PlaylistAndBeerStyle getPlaylistAndBeerStyle(@PathVariable("temperature") int temperature) throws Exception {
 		return playlistAndBeerStyleService.getPlaylistAndBeerStyle(temperature);
 	}
 
-	@GetMapping("/{temperature}")
+	@GetMapping("/temperature/{temperature}")
 	public List<Beer> getBeer(@PathVariable("temperature") int temperature) throws Exception {
 		return this.beerRepository.findByTemperatureAverage(temperature);
+	}
+	
+	@GetMapping("/id/{id}")
+	public Beer getBeer(@PathVariable("id") long id) throws Exception {
+		Optional<Beer> optionalBeer = this.beerRepository.findById(id);
+		
+		if(optionalBeer.isPresent())
+			return optionalBeer.get();
+		
+		throw new EmptyResultDataAccessException(1);
 	}
 
 	@PostMapping("/create")
@@ -62,5 +75,8 @@ public class BeerController {
 				HttpStatus.OK);
 	}
 
-	// TODO: UPDATE
+	@PutMapping("/{id}")
+	public Beer update(@PathVariable("id") long id, @RequestBody(required = true) BeerDto beerDto) {
+		return this.beerService.update(id, beerDto);
+	}
 }
