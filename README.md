@@ -8,7 +8,7 @@
   3. Git.
 
 #### Para começar:
-  - Clone o repositório utilizando o comando __git clone https://github.com/Douglas-Miler/beer-ciclic.git__
+  - Clone este repositório utilizando o comando __git clone https://github.com/Douglas-Miler/beer-ciclic.git__
   - Acesse a pasta beer-ciclic/
   
 #### Para executar a API:
