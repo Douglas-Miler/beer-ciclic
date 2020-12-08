@@ -8,7 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
+@EnableSwagger2
 public class BeerWebserviceApplication {
 
 	public static void main(String[] args) throws ParseException, SpotifyWebApiException, IOException {

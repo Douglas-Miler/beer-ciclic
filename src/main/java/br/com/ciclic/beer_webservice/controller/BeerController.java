@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,18 +42,18 @@ public class BeerController {
 		return beerRepository.findAll();
 	}
 
-	@GetMapping("/spotify/temperature/{temperature}")
-	public PlaylistAndBeerStyle getPlaylistAndBeerStyle(@PathVariable("temperature") int temperature) throws Exception {
+	@GetMapping("/spotify/temperature/{temperatureAverage}")
+	public PlaylistAndBeerStyle getPlaylistAndBeerStyle(@PathVariable("temperatureAverage") int temperature) throws Exception {
 		return playlistAndBeerStyleService.getPlaylistAndBeerStyle(temperature);
 	}
 
-	@GetMapping("/temperature/{temperature}")
-	public List<Beer> getBeer(@PathVariable("temperature") int temperature) throws Exception {
+	@GetMapping("/temperature/{temperatureAverage}")
+	public List<Beer> getBeerByTemperatureAverage(@PathVariable("temperatureAverage") int temperature) throws Exception {
 		return this.beerRepository.findByTemperatureAverage(temperature);
 	}
 	
 	@GetMapping("/id/{id}")
-	public Beer getBeer(@PathVariable("id") long id) throws Exception {
+	public Beer getBeerById(@PathVariable("id") long id) throws Exception {
 		Optional<Beer> optionalBeer = this.beerRepository.findById(id);
 		
 		if(optionalBeer.isPresent())
@@ -66,7 +67,7 @@ public class BeerController {
 		return this.beerRepository.save(new Beer(beerDto, this.beerService.getTemperatureAverage(beerDto)));
 	}
 
-	@GetMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<ResponseInformation> delete(@PathVariable("id") long id) {
 		this.beerRepository.deleteById(id);
 		return new ResponseEntity<ResponseInformation>(
