@@ -67,7 +67,7 @@ public class BeerController {
 		return this.beerRepository.save(new Beer(beerDto, this.beerService.getTemperatureAverage(beerDto)));
 	}
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseInformation> delete(@PathVariable("id") long id) {
 		this.beerRepository.deleteById(id);
 		return new ResponseEntity<ResponseInformation>(
